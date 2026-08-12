@@ -74,7 +74,8 @@
 
 .mf-ghost {
   opacity: 0;
-  filter: blur(16px);
+  z-index: 0;
+  /* filter: blur(16px); убрано из-за лагов при скролле */
   pointer-events: none;
 }
 

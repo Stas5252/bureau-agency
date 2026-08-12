@@ -207,7 +207,7 @@ button {
   left: 0;
   z-index: var(--z-cursor);
   pointer-events: none;
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference; убрано из-за лагов на ПК */
   will-change: transform;
 }
 
@@ -220,6 +220,7 @@ button {
   margin: -4px 0 0 -4px;
   border-radius: 50%;
   background: var(--cream);
+  box-shadow: 0 0 4px rgba(0,0,0,0.3); /* Тень для контраста вместо difference */
 }
 
 .cursor-ring {

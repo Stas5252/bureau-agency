@@ -11,7 +11,7 @@
   gap: 1rem;
   padding: clamp(0.9rem, 1.7vw, 1.6rem) var(--pad);
   color: var(--fg);
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference; удалено из-за жестких лагов при скролле */
   will-change: transform;
 }
 
@@ -19,11 +19,12 @@
 .nav-bar,
 .nav-bar * {
   color: #f2dfce;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5); /* Для видимости на светлом фоне вместо difference */
 }
 
 /* over the menu the blend would go mustard — sit flat on the blue instead */
 .nav-bar.is-menu {
-  mix-blend-mode: normal;
+  /* mix-blend-mode: normal; */
 }
 
 .nav-logo {

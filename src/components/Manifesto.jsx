@@ -20,7 +20,7 @@ export default function Manifesto() {
       const words = gsap.utils.toArray('.mf-words');
       const n = SLIDES.length;
 
-      gsap.set(media.slice(1), { autoAlpha: 0, scale: 1.2, filter: 'blur(12px)' });
+      gsap.set(media.slice(1), { autoAlpha: 0, scale: 1.2 });
       gsap.set(words.slice(1), { autoAlpha: 0 });
       gsap.set(words.slice(1).map((w) => w.querySelectorAll('.mf-word-inner')), { yPercent: 140 });
 
@@ -40,8 +40,8 @@ export default function Manifesto() {
 
       for (let i = 1; i < n; i++) {
         const at = i - 1;
-        tl.to(media[i - 1], { autoAlpha: 0, scale: 0.94, filter: 'blur(12px)', ease: 'power2.inOut' }, at)
-          .to(media[i], { autoAlpha: 1, scale: 1, filter: 'blur(0px)', ease: 'power2.inOut' }, at)
+        tl.to(media[i - 1], { autoAlpha: 0, scale: 0.94, ease: 'power2.inOut' }, at)
+          .to(media[i], { autoAlpha: 1, scale: 1, ease: 'power2.inOut' }, at)
           .to(
             words[i - 1].querySelectorAll('.mf-word-inner'),
             { yPercent: -140, stagger: 0.05, ease: 'power3.inOut' },

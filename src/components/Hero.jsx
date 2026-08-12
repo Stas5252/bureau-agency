@@ -42,7 +42,7 @@ export default function Hero({ started }) {
           pinSpacing: false,
         },
       })
-        .to('.hero-mark', { scale: 1.22, yPercent: -6, filter: 'blur(10px)', autoAlpha: 0.15, ease: 'power2.in' }, 0)
+        .to('.hero-mark', { scale: 1.22, yPercent: -6, autoAlpha: 0.15, ease: 'power2.in' }, 0)
         .to('.hero-tag', { yPercent: 140, autoAlpha: 0, ease: 'power2.in' }, 0)
         .to('.hero-meta', { yPercent: (i) => (i % 2 ? 90 : -90), autoAlpha: 0, ease: 'power1.in' }, 0)
         .to('.hero-strip', { yPercent: 22, scale: 1.15, autoAlpha: 0.15, ease: 'none' }, 0)
