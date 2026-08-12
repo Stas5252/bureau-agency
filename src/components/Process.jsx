@@ -137,10 +137,10 @@ export default function Process() {
 
       <div className="prc-viewport">
         <div className="prc-track" ref={track}>
-          <img src="/stapler.png" className="prc-stapler" alt="" aria-hidden="true" />
-          <img src="/paketa.png" className="prc-paketa" alt="" aria-hidden="true" />
-          <img src="/tape-h.png" className="prc-tape-h" alt="" aria-hidden="true" />
-          <img src="/tape-v.png" className="prc-tape-v" alt="" aria-hidden="true" />
+          <img src='./stapler.png' className="prc-stapler" alt="" aria-hidden="true" />
+          <img src='./paketa.png' className="prc-paketa" alt="" aria-hidden="true" />
+          <img src='./tape-h.png' className="prc-tape-h" alt="" aria-hidden="true" />
+          <img src='./tape-v.png' className="prc-tape-v" alt="" aria-hidden="true" />
           {STEPS.map((s, i) => (
             <article className="prc-card" key={s.t}>
               <div className="prc-num">{String(i + 1).padStart(2, '0')}</div>

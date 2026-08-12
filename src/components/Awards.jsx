@@ -175,7 +175,7 @@ export default function Awards() {
                 </li>
               ))}
             </ul>
-            <img className="awd-flower" src="/flower.png" alt="" data-speed="1.12" aria-hidden="true" />
+            <img className="awd-flower" src='./flower.png' alt="" data-speed="1.12" aria-hidden="true" />
           </div>
         </div>
       </div>

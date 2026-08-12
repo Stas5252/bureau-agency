@@ -4,16 +4,16 @@ import { gsap, Flip, ScrollSmoother, EASE, revealLines, velocitySkew, reduced, S
 import './Gallery.css';
 
 const SHOTS = [
-  { src: '/flower.png', c: 'Флористика · деталь', span: 'col-4' },
-  { src: '/dinner.png', c: 'Ужин на 40 персон · закат', span: 'col-4' },
-  { src: '/wardrobe.png', c: 'Объект · портал', span: 'col-4' },
+  { src: './flower.png', c: 'Флористика · деталь', span: 'col-4' },
+  { src: './dinner.png', c: 'Ужин на 40 персон · закат', span: 'col-4' },
+  { src: './wardrobe.png', c: 'Объект · портал', span: 'col-4' },
   
-  { src: '/people.png', c: 'Первый танец', span: 'col-12' },
+  { src: './people.png', c: 'Первый танец', span: 'col-12' },
   
-  { src: '/portrait.png', c: 'Портрет гостя · вечер премии', span: 'col-12' },
+  { src: './portrait.png', c: 'Портрет гостя · вечер премии', span: 'col-12' },
   
-  { src: '/wedding.png', c: 'Свадебная церемония', span: 'col-6' },
-  { src: '/arch.png', c: 'Сет-дизайн · пустынная арка', span: 'col-6' },
+  { src: './wedding.png', c: 'Свадебная церемония', span: 'col-6' },
+  { src: './arch.png', c: 'Сет-дизайн · пустынная арка', span: 'col-6' },
 ];
 
 export default function Gallery() {
@@ -158,7 +158,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <img src="/shust.png" className="gal-shust" alt="" aria-hidden="true" data-speed="1.1" />
+      <img src='./shust.png' className="gal-shust" alt="" aria-hidden="true" data-speed="1.1" />
 
       <div className="gal-grid">
         {SHOTS.map((shot, i) => (

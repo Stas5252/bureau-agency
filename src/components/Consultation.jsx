@@ -123,7 +123,7 @@ export default function Consultation() {
         </div>
 
         <div className="cns-figure" data-speed="0.94">
-          <img src="/wardrobe.png" alt="Резной шкаф в пустыне" />
+          <img src='./wardrobe.png' alt="Резной шкаф в пустыне" />
           <span className="cns-figure-cap u-mono">Открываем то, что было закрыто</span>
         </div>
 

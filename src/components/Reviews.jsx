@@ -73,7 +73,7 @@ export default function Reviews() {
 
   return (
     <section className="reviews section" ref={root} data-theme="ink">
-      <img className="rvw-book" src="/book.png" alt="" aria-hidden="true" />
+      <img className="rvw-book" src='./book.png' alt="" aria-hidden="true" />
 
       <div className="rvw-grid">
         <div className="rvw-left">

@@ -144,9 +144,9 @@ export default function Services() {
       </p>
 
       <div className="srv-aside" aria-hidden="true">
-        <img className="srv-key" src="/key.png" alt="" data-speed="0.86" />
-        <img className="srv-pink-suit" src="/pink-suit.png" alt="" data-speed="1.1" />
-        <img className="srv-pepper" src="/pepper.png" alt="" data-speed="0.9" />
+        <img className="srv-key" src='./key.png' alt="" data-speed="0.86" />
+        <img className="srv-pink-suit" src='./pink-suit.png' alt="" data-speed="1.1" />
+        <img className="srv-pepper" src='./pepper.png' alt="" data-speed="0.9" />
         <p className="srv-laurel u-meta">Ежегодный победитель премии Wedding Awards</p>
       </div>
 

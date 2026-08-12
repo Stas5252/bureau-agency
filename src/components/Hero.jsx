@@ -178,7 +178,7 @@ export default function Hero({ started }) {
       <div className="hero-cue u-mono">
         <span>scroll</span>
         <span className="hero-cue-line" />
-        <img src="/arrow-blue.png" className="hero-arrow" alt="" aria-hidden="true" />
+        <img src='./arrow-blue.png' className="hero-arrow" alt="" aria-hidden="true" />
       </div>
     </section>
   );
