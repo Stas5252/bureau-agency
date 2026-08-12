@@ -4,16 +4,16 @@ import './Preloader.css';
 
 /* the loader doubles as the asset warm-up: progress is real, not faked */
 const ASSETS = [
-  '/arch.png',
-  '/key.png',
-  '/wardrobe.png',
-  '/book.png',
-  '/portrait.png',
-  '/sculpture.png',
-  '/wedding.png',
-  '/dinner.png',
-  '/flower.png',
-  '/people.png',
+  './arch.png',
+  './key.png',
+  './wardrobe.png',
+  './book.png',
+  './portrait.png',
+  './sculpture.png',
+  './wedding.png',
+  './dinner.png',
+  './flower.png',
+  './people.png',
 ];
 
 const WORDS = ['САМАРА', 'МОСКВА', 'САНКТ-ПЕТЕРБУРГ', 'ПРИВОЛЖЬЕ'];

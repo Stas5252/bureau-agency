@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger, SplitText, EASE, magnetic, reduced, isTouch } from '../lib/anim';
 import './Hero.css';
 
-const STRIP = ['/portrait.png', '/wedding.png', '/arch.png', '/people.png', '/sculpture.png', '/dinner.png'];
+const STRIP = ['./portrait.png', './wedding.png', './arch.png', './people.png', './sculpture.png', './dinner.png'];
 
 export default function Hero({ started }) {
   const root = useRef(null);

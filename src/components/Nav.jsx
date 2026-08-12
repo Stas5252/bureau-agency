@@ -3,13 +3,13 @@ import { gsap, ScrollTrigger, ScrollSmoother, EASE, EASE_IO, magnetic, reduced }
 import './Nav.css';
 
 const LINKS = [
-  { id: 'manifesto', label: 'Манифест', num: '01', img: '/arch.png' },
-  { id: 'services', label: 'Услуги', num: '02', img: '/key.png' },
-  { id: 'process', label: 'Процесс', num: '03', img: '/sculpture.png' },
-  { id: 'awards', label: 'Награды', num: '04', img: '/flower.png' },
-  { id: 'consultation', label: 'Консультации', num: '05', img: '/wardrobe.png' },
-  { id: 'gallery', label: 'Портфолио', num: '06', img: '/wedding.png' },
-  { id: 'contact', label: 'Контакты', num: '07', img: '/portrait.png' },
+  { id: 'manifesto', label: 'Манифест', num: '01', img: './arch.png' },
+  { id: 'services', label: 'Услуги', num: '02', img: './key.png' },
+  { id: 'process', label: 'Процесс', num: '03', img: './sculpture.png' },
+  { id: 'awards', label: 'Награды', num: '04', img: './flower.png' },
+  { id: 'consultation', label: 'Консультации', num: '05', img: './wardrobe.png' },
+  { id: 'gallery', label: 'Портфолио', num: '06', img: './wedding.png' },
+  { id: 'contact', label: 'Контакты', num: '07', img: './portrait.png' },
 ];
 
 function samaraTime() {

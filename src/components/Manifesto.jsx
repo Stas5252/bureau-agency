@@ -3,10 +3,10 @@ import { gsap, ScrollTrigger, reduced, isTouch } from '../lib/anim';
 import './Manifesto.css';
 
 const SLIDES = [
-  { img: '/arch.png', a: 'Частные', b: 'события', place: 'Самара', craft: 'Режиссура' },
-  { img: '/dinner.png', a: 'Свадьбы', b: 'и юбилеи', place: 'Москва', craft: 'Сценография' },
-  { img: '/sculpture.png', a: 'Корпора', b: 'тивные', place: 'Санкт-Петербург', craft: 'Продакшн' },
-  { img: '/wedding.png', a: 'Кино', b: 'и медиа', place: 'Приволжье', craft: 'Контент' },
+  { img: './arch.png', a: 'Частные', b: 'события', place: 'Самара', craft: 'Режиссура' },
+  { img: './dinner.png', a: 'Свадьбы', b: 'и юбилеи', place: 'Москва', craft: 'Сценография' },
+  { img: './sculpture.png', a: 'Корпора', b: 'тивные', place: 'Санкт-Петербург', craft: 'Продакшн' },
+  { img: './wedding.png', a: 'Кино', b: 'и медиа', place: 'Приволжье', craft: 'Контент' },
 ];
 
 export default function Manifesto() {
