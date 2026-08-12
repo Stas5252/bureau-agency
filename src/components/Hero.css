@@ -1,0 +1,197 @@
+.hero {
+  position: relative;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(5.5rem, 12vh, 9rem) var(--pad) clamp(3rem, 6vh, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- moving photo strip behind the wordmark ---- */
+.hero-strip {
+  position: absolute;
+  top: 50%;
+  left: -6vw;
+  width: 112vw;
+  height: clamp(240px, 42vh, 460px);
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.hero-strip-track {
+  display: flex;
+  gap: clamp(0.6rem, 1.4vw, 1.4rem);
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+}
+
+.hero-strip-item {
+  width: clamp(180px, 21vw, 340px);
+  height: 100%;
+  overflow: hidden;
+  background: rgba(10, 10, 10, 0.06);
+}
+
+.hero-strip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: luminosity;
+  opacity: 0.85;
+}
+
+/* ---- layout ---- */
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.hero-meta {
+  max-width: 34ch;
+}
+
+.hero-meta-tl { grid-column: 1; grid-row: 1; }
+.hero-meta-tr { grid-column: 2; grid-row: 1; justify-self: end; text-align: right; }
+.hero-meta-br { grid-column: 2; grid-row: 3; justify-self: end; text-align: right; align-self: end; }
+
+.hero-center {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  will-change: transform;
+}
+
+.hero-mark {
+  font-family: var(--f-black);
+  font-weight: 400;
+  color: var(--blue);
+  font-size: clamp(4.5rem, 21vw, 21rem);
+  line-height: 0.82;
+  letter-spacing: 0.01em;
+  will-change: transform, filter;
+}
+
+.hero-tag-inner {
+  display: inline-block;
+}
+
+.hero-tag {
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 5.2vw, 4.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-top: clamp(-0.9rem, -1.4vw, -0.4rem);
+}
+
+/* ---- rotating badge ---- */
+.hero-badge {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(3rem, 8vh, 6rem);
+  width: clamp(104px, 11vw, 152px);
+  aspect-ratio: 1;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+
+.hero-badge-spin {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-badge-text {
+  font-family: var(--f-mono);
+  font-size: 7.1px;
+  letter-spacing: 0.09em;
+  fill: var(--ink);
+  text-transform: uppercase;
+}
+
+.hero-badge-core {
+  position: absolute;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--blue);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-badge:hover .hero-badge-core {
+  transform: scale(1.9);
+}
+
+/* ---- scroll cue ---- */
+.hero-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.2rem, 3vh, 2.2rem);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  z-index: 3;
+  opacity: 0.7;
+}
+
+.hero-cue-line {
+  width: 1px;
+  height: clamp(34px, 6vh, 60px);
+  background: linear-gradient(180deg, currentColor, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cue-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--blue);
+  animation: cue 2.1s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+
+@keyframes cue {
+  0% { transform: translateY(-100%); }
+  55%, 100% { transform: translateY(100%); }
+}
+
+
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+  }
+  .hero-meta { max-width: 100%; }
+  .hero-meta-tl { grid-column: 1; grid-row: 1; }
+  .hero-meta-tr { grid-column: 1; grid-row: 3; justify-self: start; text-align: left; }
+  .hero-meta-br { grid-column: 1; grid-row: 4; justify-self: start; text-align: left; }
+  .hero-center { grid-row: 2; }
+  .hero-badge { display: none; }
+  .hero-cue { display: none; }
+  .hero-strip { opacity: 0.4; }
+  .hero-mark { font-size: clamp(3.4rem, 29vw, 9rem); }
+  .hero-tag { font-size: clamp(1.3rem, 8vw, 3rem); }
+  .hero-strip { height: clamp(200px, 34vh, 320px); }
+}

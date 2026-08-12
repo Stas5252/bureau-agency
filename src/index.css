@@ -1,0 +1,272 @@
+/* ============================================================
+   BUREAU [БЮРО] — design tokens & global layer
+   Palette sampled from the brand board: cream / electric blue / ink
+   ============================================================ */
+
+:root {
+  /* brand */
+  --cream: #f2dfce;
+  --cream-deep: #e8d2bd;
+  --blue: #1527ce;
+  --blue-bright: #2438ff;
+  --ink: #0a0a0a;
+  --paper: #eaeaea;
+  --white: #ffffff;
+
+  /* runtime theme (animated by ScrollTrigger) */
+  --bg: var(--cream);
+  --fg: var(--ink);
+  --accent: var(--blue);
+
+  /* type */
+  --f-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --f-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --f-black: 'UnifrakturMaguntia', 'Times New Roman', serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* metrics */
+  --pad: clamp(1rem, 3.2vw, 3.75rem);
+  --rule: rgba(10, 10, 10, 0.16);
+
+  /* z-index scale */
+  --z-grain: 9000;
+  --z-menu: 9400;
+  --z-nav: 9500; /* the bar (and its close button) stays above the menu */
+  --z-cursor: 9800;
+  --z-loader: 9900;
+}
+
+/* very wide screens: widen the gutters instead of stretching every line */
+@media (min-width: 1700px) {
+  :root { --pad: 5.5vw; }
+}
+
+@media (min-width: 2300px) {
+  :root { --pad: 8vw; }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  transition: background-color 0.05s linear;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- smooth scroll shell ---------- */
+/* `clip` (not `hidden`) so the wrapper never becomes a scrollport — otherwise
+   position: sticky inside it stops working when the smoother is off. */
+#smooth-wrapper {
+  overflow-x: clip;
+}
+
+/* ---------- typography primitives ---------- */
+.u-display {
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.u-mono {
+  font-family: var(--f-mono);
+  font-size: clamp(0.6rem, 0.72vw, 0.78rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.u-meta {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 0.95vw, 0.92rem);
+  letter-spacing: 0.01em;
+  line-height: 1.32;
+  text-transform: uppercase;
+}
+
+.u-body {
+  font-size: clamp(0.85rem, 1.02vw, 1rem);
+  line-height: 1.5;
+}
+
+.u-blue {
+  color: var(--blue);
+}
+
+/* masked line/char wrappers used by SplitText */
+.mask {
+  overflow: clip;
+  display: block;
+}
+
+/* A mask clips at its padding box. Line boxes are tighter than the glyphs
+   (Й/Ё lose their marks, Ц/Д/у/р lose their tails, blackletter loses its
+   swashes), so pad every mask out and pull the layout back by the same amount.
+   Reveal offsets are ≥135% to stay hidden inside the enlarged box. */
+.mask,
+.split-line-mask,
+.mark-char-mask,
+.ftr-char-mask {
+  padding: 0.18em 0.07em 0.17em;
+  margin: -0.18em -0.07em -0.17em;
+}
+
+.section {
+  position: relative;
+  padding: clamp(5rem, 11vh, 10rem) var(--pad);
+}
+
+.section-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(2rem, 5vw, 4.5rem);
+}
+
+/* ---------- grain ---------- */
+/* Static film grain. An animated grain under mix-blend-mode repaints the whole
+   blended viewport every frame, which is the single most expensive thing on a
+   page like this — the texture reads the same standing still. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-grain);
+  opacity: 0.04;
+  /* Убран mix-blend-mode: multiply, так как он вызывает жесткие лаги при скролле (репейнт всего экрана) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* ---------- custom cursor ---------- */
+@media (hover: hover) and (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--cream);
+}
+
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border: 1px solid rgba(242, 223, 206, 0.55);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+
+.cursor-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0;
+  white-space: nowrap;
+  transform: scale(0.6);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+}

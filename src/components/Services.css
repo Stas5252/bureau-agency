@@ -1,0 +1,235 @@
+.services {
+  position: relative;
+  background: var(--cream);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.services .accent {
+  color: var(--blue);
+}
+
+.srv-lead {
+  max-width: 46ch;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+  opacity: 0.78;
+}
+
+/* key + laurel travel together so they never collide */
+.srv-aside {
+  position: absolute;
+  right: var(--pad);
+  top: clamp(13vh, 20vh, 26vh);
+  width: clamp(170px, 26vw, 400px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(0.4rem, 1vw, 1rem);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.srv-key {
+  width: 100%;
+  pointer-events: none;
+  /* the PNG sits on a tan backdrop: lift it toward white, multiply it into the
+     cream and feather the edges so no rectangle survives */
+  filter: grayscale(1) brightness(1.3) contrast(1.3);
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(58% 58% at 50% 50%, #000 45%, transparent 92%);
+  mask-image: radial-gradient(58% 58% at 50% 50%, #000 45%, transparent 92%);
+}
+
+.srv-pink-suit {
+  position: absolute;
+  top: 10%;
+  left: -50%;
+  width: 140%;
+  transform: rotate(-15deg);
+  z-index: -1;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+}
+
+.srv-pepper {
+  position: absolute;
+  bottom: 0%;
+  left: -20%;
+  width: 80%;
+  transform: rotate(20deg);
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+}
+
+/* the laurel line that sits next to the key on the brand board */
+.srv-laurel {
+  color: var(--blue);
+  text-align: right;
+  font-size: clamp(0.8rem, 1.15vw, 1.12rem);
+  line-height: 1.24;
+  max-width: 13ch;
+}
+
+.srv-list {
+  position: relative;
+  z-index: 2;
+}
+
+.srv-rule {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.22;
+  transform-origin: 0 50%;
+}
+
+.srv-row {
+  position: relative;
+  cursor: pointer;
+}
+
+.srv-main {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.85fr) auto;
+  align-items: center;
+  gap: clamp(0.8rem, 2.4vw, 2.6rem);
+  padding: clamp(1rem, 2.2vw, 2rem) 0;
+  transition: padding-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-row:hover .srv-main {
+  padding-left: clamp(0.6rem, 1.6vw, 1.8rem);
+}
+
+.srv-num {
+  opacity: 0.45;
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-row:hover .srv-num {
+  opacity: 1;
+  transform: translateY(-0.5em);
+  color: var(--accent);
+}
+
+.srv-title {
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-size: clamp(1.35rem, 3.6vw, 3.4rem);
+}
+
+.srv-title-ghost {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--accent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-row:hover .srv-title-fill {
+  color: var(--accent);
+  opacity: 0.16;
+}
+
+.srv-row:hover .srv-title-ghost {
+  clip-path: inset(0 0 0 0);
+}
+
+.srv-title-fill {
+  transition: color 0.5s ease, opacity 0.5s ease;
+}
+
+.srv-desc {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 42ch;
+}
+
+.srv-row:hover .srv-desc {
+  opacity: 0.72;
+  transform: translateY(0);
+}
+
+.srv-arrow {
+  font-size: clamp(1rem, 1.8vw, 1.6rem);
+  opacity: 0;
+  transform: translate(-12px, 12px) rotate(-25deg);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--accent);
+}
+
+.srv-row:hover .srv-arrow {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg);
+}
+
+/* floating hover preview */
+.srv-float {
+  --w: clamp(180px, 17vw, 290px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--w);
+  aspect-ratio: 4 / 5;
+  /* sits to the right of the pointer so the row stays readable */
+  margin: calc(var(--w) * -0.625) 0 0 1.4rem;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transform: scale(0.75);
+  will-change: transform;
+}
+
+.srv-float img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 980px) {
+  /* the aside stops floating and becomes a small banner above the list */
+  .srv-aside {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin: -1.5rem 0 2.5rem;
+  }
+  .srv-key { width: clamp(90px, 26vw, 160px); }
+  .srv-laurel { text-align: left; max-width: 20ch; }
+}
+
+/* touch never fires hover: keep the descriptions and numbers legible */
+@media (hover: none) {
+  .srv-desc { opacity: 0.72; transform: none; }
+  .srv-num { opacity: 0.7; }
+  .srv-title-ghost { display: none; }
+}
+
+@media (max-width: 860px) {
+  .srv-main {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'num title'
+      '. desc';
+    row-gap: 0.5rem;
+  }
+  .srv-num { grid-area: num; }
+  .srv-title { grid-area: title; }
+  .srv-desc { grid-area: desc; opacity: 0.7; transform: none; }
+  .srv-arrow { display: none; }
+}

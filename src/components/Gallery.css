@@ -1,0 +1,206 @@
+.gallery {
+  position: relative;
+  background: #0a0a0a;
+  color: var(--cream);
+  padding-bottom: clamp(4rem, 12vh, 9rem);
+  overflow: hidden;
+}
+
+.gal-head {
+  padding-bottom: 0;
+}
+
+.gal-title-split {
+  line-height: 0.85;
+}
+
+.gal-title-part {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(4.5rem, 15vw, 15rem);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .gal-title-part {
+    line-height: 1.05;
+    word-break: break-word;
+    font-size: clamp(3rem, 14vw, 11rem);
+  }
+}
+
+.gal-title-cream {
+  color: var(--cream);
+}
+
+.gal-title-blue {
+  color: var(--blue-bright);
+}
+
+
+.gal-word {
+  overflow: hidden;
+  padding-bottom: clamp(1rem, 3vw, 2.5rem);
+}
+
+.gal-word-inner {
+  display: flex;
+  width: max-content;
+  font-family: var(--f-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  font-size: clamp(2.5rem, 9vw, 9rem);
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242, 223, 206, 0.35);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.1vw, 1.1rem);
+  padding: 0 var(--pad);
+}
+
+.gal-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #141414;
+  cursor: pointer;
+}
+
+.gal-item.col-4 { grid-column: span 4; aspect-ratio: 3 / 4; }
+.gal-item.col-6 { grid-column: span 6; aspect-ratio: 4 / 3; }
+.gal-item.col-12 { grid-column: span 12; aspect-ratio: 21 / 9; }
+
+.gal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+  will-change: transform;
+}
+
+.gal-item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0) contrast(1.05);
+}
+
+.gal-cap {
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.7rem;
+  right: 0.7rem;
+  text-align: left;
+  color: var(--cream);
+  opacity: 0;
+  transform: translateY(0.6rem);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
+}
+
+.gal-item:hover .gal-cap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- lightbox ---- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+.lb-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 6, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.lb-img {
+  position: relative;
+  max-width: min(86vw, 1200px);
+  max-height: 78vh;
+  width: auto;
+  object-fit: contain;
+  will-change: transform;
+}
+
+.lb-bar {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1rem, 4vh, 2.6rem);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  padding: 0.75rem 1.2rem;
+  background: rgba(242, 223, 206, 0.08);
+  border: 1px solid rgba(242, 223, 206, 0.2);
+  border-radius: 999px;
+  color: var(--cream);
+  backdrop-filter: blur(6px);
+  max-width: min(92vw, 760px);
+}
+
+.lb-bar button {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.lb-bar button:hover {
+  transform: scale(1.25);
+  color: var(--blue-bright);
+}
+
+.lb-cap {
+  opacity: 0.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gal-shust {
+  position: absolute;
+  top: 50%;
+  right: -5%;
+  width: clamp(150px, 25vw, 400px);
+  transform: rotate(-10deg);
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+
+/* no hover on touch — captions and colour would never appear */
+@media (hover: none) {
+  .gal-cap {
+    opacity: 1;
+    transform: none;
+  }
+  .gal-item img { filter: grayscale(1) contrast(1.05); }
+}
+
+@media (max-width: 900px) {
+  .gal-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .gal-item.col-4 { grid-column: span 12; aspect-ratio: 4 / 3; }
+  .gal-item.col-6 { grid-column: span 12; aspect-ratio: 4 / 3; }
+  .gal-item.col-12 { grid-column: span 12; aspect-ratio: 16 / 9; }
+  .lb-cap { display: none; }
+}

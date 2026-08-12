@@ -1,0 +1,114 @@
+.reviews {
+  position: relative;
+  background: #0a0a0a;
+  color: var(--cream);
+  overflow: hidden;
+}
+
+.rvw-book {
+  position: absolute;
+  right: -12vw;
+  top: 8vh;
+  width: min(72vw, 1100px);
+  opacity: 0.085;
+  filter: grayscale(1) contrast(1.2);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.rvw-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  /* the column must stay full height or the sticky child has nowhere to travel */
+  align-items: stretch;
+}
+
+.rvw-left-inner {
+  position: sticky;
+  top: clamp(7rem, 18vh, 12rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.8rem);
+}
+
+.rvw-left .idx {
+  opacity: 0.6;
+}
+
+.rvw-statement {
+  font-family: var(--f-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.042em;
+  line-height: 0.9;
+  font-size: clamp(1.9rem, 5.2vw, 5rem);
+  color: var(--blue-bright);
+}
+
+.rvw-sub {
+  opacity: 0.72;
+  font-style: italic;
+}
+
+/* ---- stacking cards ---- */
+.rvw-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  perspective: 1200px;
+}
+
+.rvw-card {
+  position: sticky;
+  padding: clamp(1.4rem, 2.6vw, 2.6rem);
+  background: #0f0f0f;
+  border: 1px solid rgba(242, 223, 206, 0.16);
+  box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-height: clamp(230px, 30vh, 320px);
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+}
+
+.rvw-quote {
+  font-family: var(--f-black);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 0.6;
+  color: var(--blue-bright);
+}
+
+.rvw-text {
+  font-size: clamp(0.95rem, 1.35vw, 1.28rem);
+  line-height: 1.42;
+}
+
+.rvw-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(242, 223, 206, 0.16);
+}
+
+.rvw-author {
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+}
+
+.rvw-role {
+  opacity: 0.55;
+}
+
+@media (max-width: 860px) {
+  .rvw-grid { grid-template-columns: 1fr; }
+  .rvw-left-inner { position: static; }
+  .rvw-card { position: relative; top: auto !important; }
+}

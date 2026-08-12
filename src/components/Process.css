@@ -1,0 +1,202 @@
+.process {
+  position: relative;
+  min-height: 100svh;
+  background: #0a0a0a;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2rem, 5vh, 4rem);
+  padding: clamp(5rem, 12vh, 8rem) 0;
+  overflow: hidden;
+}
+
+.prc-top {
+  padding: 0 var(--pad);
+}
+
+.prc-head {
+  font-family: var(--f-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  font-size: clamp(2.6rem, 11vw, 11rem);
+}
+
+.prc-head .mark-char {
+  will-change: transform;
+}
+
+.prc-squiggle {
+  width: min(62vw, 900px);
+  height: clamp(18px, 3vw, 40px);
+  color: var(--blue-bright);
+  margin-top: -0.4rem;
+}
+
+.prc-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: clamp(1rem, 2.6vw, 2rem);
+  opacity: 0.75;
+}
+
+.prc-meta b {
+  color: var(--blue-bright);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.prc-bar {
+  height: 1px;
+  background: rgba(242, 223, 206, 0.22);
+  margin-top: 0.7rem;
+}
+
+.prc-bar-fill {
+  height: 100%;
+  background: var(--blue-bright);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+/* ---- horizontal track ---- */
+.prc-viewport {
+  overflow: hidden;
+}
+
+.prc-track {
+  display: flex;
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+  padding: 0 var(--pad);
+  width: max-content;
+  will-change: transform;
+}
+
+.prc-card {
+  position: relative;
+  width: clamp(230px, 27vw, 380px);
+  min-height: clamp(220px, 28vh, 330px);
+  padding: clamp(1.1rem, 1.8vw, 1.8rem);
+  border: 1px solid rgba(242, 223, 206, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: rgba(242, 223, 206, 0.03);
+  overflow: hidden;
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.prc-card:hover {
+  background: rgba(36, 56, 255, 0.14);
+  border-color: var(--blue-bright);
+}
+
+.prc-num {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(3.4rem, 7vw, 6.4rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242, 223, 206, 0.45);
+  will-change: transform;
+}
+
+.prc-card:hover .prc-num {
+  -webkit-text-stroke-color: var(--blue-bright);
+}
+
+.prc-title {
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-size: clamp(1.05rem, 1.9vw, 1.7rem);
+  margin-top: auto;
+}
+
+.prc-desc {
+  opacity: 0.66;
+}
+
+.prc-mark {
+  position: absolute;
+  top: clamp(1.1rem, 1.8vw, 1.8rem);
+  right: clamp(1.1rem, 1.8vw, 1.8rem);
+  font-size: 0.7rem;
+  color: var(--blue-bright);
+  opacity: 0.5;
+}
+
+.prc-card-end {
+  border-color: var(--blue-bright);
+  background: var(--blue);
+  justify-content: flex-end;
+}
+
+.prc-card-end .prc-title {
+  font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+}
+
+.prc-card-end em {
+  font-family: var(--f-black);
+  font-style: normal;
+  text-transform: none;
+  font-size: 1.5em;
+  letter-spacing: 0;
+}
+
+.prc-stapler {
+  position: absolute;
+  top: 10%;
+  left: 5vw;
+  width: clamp(150px, 15vw, 300px);
+  transform: rotate(-20deg);
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+
+.prc-paketa {
+  position: absolute;
+  bottom: -5%;
+  right: -5vw;
+  width: clamp(100px, 12vw, 250px);
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+
+.prc-tape-h {
+  position: absolute;
+  top: -20px;
+  left: 25vw;
+  width: clamp(80px, 10vw, 150px);
+  transform: rotate(5deg);
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.9;
+}
+
+.prc-tape-v {
+  position: absolute;
+  bottom: 20%;
+  right: 15vw;
+  width: clamp(40px, 6vw, 90px);
+  transform: rotate(-10deg);
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.9;
+}
+
+
+@media (max-width: 860px) {
+  .prc-card { width: 76vw; min-height: 300px; }
+  .prc-squiggle { width: 86vw; }
+  .prc-stapler, .prc-paketa, .prc-tape-h, .prc-tape-v { display: none; }
+}
