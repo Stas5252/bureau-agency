@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { gsap, Flip, ScrollSmoother, EASE, revealLines, velocitySkew, reduced, SplitText } from '../lib/anim';
+import { gsap, Flip, ScrollSmoother, EASE, reduced, SplitText } from '../lib/anim';
 import './Gallery.css';
 
 const SHOTS = [
@@ -144,9 +144,8 @@ export default function Gallery() {
     <section className="gallery" id="gallery" ref={root} data-theme="ink">
       <div className="gal-head section">
         <div className="sec-head">
-          <h2 className="sec-title gal-title-split" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="mask"><div className="gal-title-part gal-title-cream">ПОРТ</div></div>
-            <div className="mask"><div className="gal-title-part gal-title-blue">ФОЛИО</div></div>
+          <h2 className="sec-title gal-title-split">
+            <div className="mask"><span className="gal-title-part gal-title-cream">ПОРТФОЛИО</span></div>
           </h2>
           <span className="idx">(07) / Избранные кадры</span>
         </div>

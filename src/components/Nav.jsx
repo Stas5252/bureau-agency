@@ -71,6 +71,8 @@ export default function Nav() {
     };
   }, []);
 
+  const isFirst = useRef(true);
+
   /* menu open / close choreography */
   useEffect(() => {
     const el = menu.current;
@@ -78,30 +80,62 @@ export default function Nav() {
     const smoother = ScrollSmoother.get();
     if (smoother) smoother.paused(open);
     else document.body.style.overflow = open ? 'hidden' : '';
+
+    if (isFirst.current) {
+      isFirst.current = false;
+      gsap.set(el, { pointerEvents: 'none' });
+      gsap.set('.menu-panel', { yPercent: -101, y: 0 });
+      gsap.set('.menu-link-inner', { yPercent: 140 });
+      gsap.set('.menu-foot > *', { autoAlpha: 0, yPercent: 40 });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       if (open) {
         gsap.set(el, { pointerEvents: 'auto' });
         const tl = gsap.timeline();
         tl.to('.menu-panel', {
           yPercent: 0,
-          duration: 0.95,
-          stagger: 0.05,
+          duration: 0.8,
+          stagger: 0.03,
           ease: EASE_IO,
         })
-          .from(
+          .fromTo(
             '.menu-link-inner',
-            { yPercent: 140, rotation: 5, duration: 0.9, stagger: 0.06, ease: EASE },
-            '-=0.45'
+            { yPercent: 140, rotation: 3 },
+            { yPercent: 0, rotation: 0, duration: 0.7, stagger: 0.04, ease: EASE },
+            '-=0.25'
           )
-          .from('.menu-foot > *', { yPercent: 120, autoAlpha: 0, duration: 0.7, stagger: 0.05, ease: EASE }, '-=0.6');
+          .fromTo(
+            '.menu-foot > *',
+            { yPercent: 40, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.5, stagger: 0.04, ease: EASE },
+            '-=0.35'
+          );
       } else {
-        gsap.to('.menu-panel', {
-          yPercent: -101,
-          duration: 0.75,
-          stagger: { each: 0.04, from: 'end' },
-          ease: EASE_IO,
-          onComplete: () => gsap.set(el, { pointerEvents: 'none', clearProps: 'pointerEvents' }),
+        const tl = gsap.timeline({
+          onComplete: () => {
+            gsap.set(el, { pointerEvents: 'none', clearProps: 'pointerEvents' });
+          },
         });
+        tl.to('.menu-link-inner', {
+          yPercent: -140,
+          duration: 0.4,
+          stagger: { each: 0.02, from: 'end' },
+          ease: 'power3.in',
+        })
+          .to('.menu-foot > *', { autoAlpha: 0, yPercent: -30, duration: 0.3 }, 0)
+          .to('.menu-preview img', { autoAlpha: 0, duration: 0.2 }, 0)
+          .to(
+            '.menu-panel',
+            {
+              yPercent: -101,
+              duration: 0.75,
+              stagger: { each: 0.04, from: 'end' },
+              ease: EASE_IO,
+            },
+            0.05
+          );
       }
     }, menu);
     return () => ctx.revert();

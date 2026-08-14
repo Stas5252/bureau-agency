@@ -21,7 +21,10 @@
   text-transform: uppercase;
   letter-spacing: -0.045em;
   line-height: 0.92;
-  font-size: clamp(2.6rem, 11vw, 11rem);
+  font-size: clamp(2.2rem, 9vw, 11rem);
+  white-space: nowrap;
+  word-break: keep-all;
+  hyphens: none;
 }
 
 .prc-head .mark-char {
@@ -150,53 +153,25 @@
   letter-spacing: 0;
 }
 
-.prc-stapler {
-  position: absolute;
-  top: 10%;
-  left: 5vw;
-  width: clamp(150px, 15vw, 300px);
-  transform: rotate(-20deg);
-  pointer-events: none;
-  z-index: 5;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
-}
-
-.prc-paketa {
-  position: absolute;
-  bottom: -5%;
-  right: -5vw;
-  width: clamp(100px, 12vw, 250px);
-  transform: rotate(15deg);
-  pointer-events: none;
-  z-index: 5;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
-}
-
-.prc-tape-h {
-  position: absolute;
-  top: -20px;
-  left: 25vw;
-  width: clamp(80px, 10vw, 150px);
-  transform: rotate(5deg);
-  pointer-events: none;
-  z-index: 6;
-  opacity: 0.9;
-}
-
-.prc-tape-v {
-  position: absolute;
-  bottom: 20%;
-  right: 15vw;
-  width: clamp(40px, 6vw, 90px);
-  transform: rotate(-10deg);
-  pointer-events: none;
-  z-index: 6;
-  opacity: 0.9;
-}
 
 
 @media (max-width: 860px) {
-  .prc-card { width: 76vw; min-height: 300px; }
-  .prc-squiggle { width: 86vw; }
-  .prc-stapler, .prc-paketa, .prc-tape-h, .prc-tape-v { display: none; }
+  .prc-head { font-size: clamp(2.2rem, 9.5vw, 6rem); }
+  .prc-card {
+    width: clamp(240px, 74vw, 340px);
+    min-height: 260px;
+    padding: 1.2rem;
+  }
+  .prc-squiggle { width: 88vw; }
+}
+
+@media (max-width: 480px) {
+  .prc-card {
+    width: clamp(220px, 82vw, 300px);
+    min-height: 240px;
+    padding: 1rem;
+  }
+  .prc-meta {
+    font-size: 0.68rem;
+  }
 }

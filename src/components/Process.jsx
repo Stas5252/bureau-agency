@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { gsap, SplitText, EASE, reduced, isTouch } from '../lib/anim';
+import { gsap, SplitText, EASE, reduced } from '../lib/anim';
 import './Process.css';
 
 const STEPS = [
@@ -22,7 +22,6 @@ export default function Process() {
   const [step, setStep] = useState(1);
 
   useEffect(() => {
-    let swipeCleanup;
     const ctx = gsap.context(() => {
       /* heading letters drop in, each in its own mask so descenders survive */
       SplitText.create(root.current.querySelector('.prc-head'), {
@@ -103,7 +102,6 @@ export default function Process() {
     }, root);
 
     return () => {
-      swipeCleanup?.();
       ctx.revert();
     };
   }, []);
@@ -137,10 +135,6 @@ export default function Process() {
 
       <div className="prc-viewport">
         <div className="prc-track" ref={track}>
-          <img src='./stapler.png' className="prc-stapler" alt="" aria-hidden="true" />
-          <img src='./paketa.png' className="prc-paketa" alt="" aria-hidden="true" />
-          <img src='./tape-h.png' className="prc-tape-h" alt="" aria-hidden="true" />
-          <img src='./tape-v.png' className="prc-tape-v" alt="" aria-hidden="true" />
           {STEPS.map((s, i) => (
             <article className="prc-card" key={s.t}>
               <div className="prc-num">{String(i + 1).padStart(2, '0')}</div>

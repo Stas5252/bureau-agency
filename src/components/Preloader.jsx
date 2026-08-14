@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { gsap, EASE, EASE_IO, reduced } from '../lib/anim';
+import { gsap, EASE, EASE_IO } from '../lib/anim';
 import './Preloader.css';
 
 /* the loader doubles as the asset warm-up: progress is real, not faked */

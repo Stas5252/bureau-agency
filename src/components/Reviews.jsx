@@ -34,37 +34,14 @@ export default function Reviews() {
       revealLines(root.current.querySelector('.rvw-sub'), { start: 'top 92%' });
 
       const cards = gsap.utils.toArray('.rvw-card');
-      cards.forEach((card, i) => {
+      cards.forEach((card) => {
         gsap.from(card, {
-          yPercent: 18,
+          yPercent: 24,
           autoAlpha: 0,
-          duration: 1,
+          duration: 0.9,
           ease: EASE,
-          scrollTrigger: { trigger: card, start: 'top 92%', once: true },
+          scrollTrigger: { trigger: card, start: 'top 88%', once: true },
         });
-
-        /* cards stack: each one shrinks, tilts back, and blurs as the next slides over it */
-        if (i < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.94 - (cards.length - 1 - i) * 0.02,
-            rotationX: 12,
-            yPercent: -3,
-            filter: 'brightness(0.5) blur(3px)',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: cards[i + 1],
-              start: 'top 85%',
-              end: 'top 30%',
-              scrub: true,
-            },
-          });
-        }
-      });
-
-      gsap.to('.rvw-book', {
-        yPercent: -12,
-        ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
       });
     }, root);
 
@@ -73,8 +50,6 @@ export default function Reviews() {
 
   return (
     <section className="reviews section" ref={root} data-theme="ink">
-      <img className="rvw-book" src='./book.png' alt="" aria-hidden="true" />
-
       <div className="rvw-grid">
         <div className="rvw-left">
           <div className="rvw-left-inner">
@@ -91,8 +66,8 @@ export default function Reviews() {
         </div>
 
         <div className="rvw-stack">
-          {REVIEWS.map((r, i) => (
-            <article className="rvw-card" key={r.a} style={{ top: `calc(18vh + ${i * 1.6}rem)` }}>
+          {REVIEWS.map((r) => (
+            <article className="rvw-card" key={r.a}>
               <span className="rvw-quote" aria-hidden="true">«</span>
               <p className="rvw-text">{r.t}</p>
               <footer className="rvw-foot">

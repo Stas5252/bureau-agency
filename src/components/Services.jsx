@@ -98,17 +98,20 @@ export default function Services() {
       window.addEventListener('mousemove', onMove, { passive: true });
 
       const imgs = el.querySelectorAll('img');
+      gsap.set(el, { autoAlpha: 0, scale: 0.75 });
+      gsap.set(imgs, { autoAlpha: 0 });
+
       const hideFloat = () =>
-        gsap.to(el, { scale: 0.75, autoAlpha: 0, duration: 0.4, ease: 'power3.out' });
+        gsap.to(el, { scale: 0.75, autoAlpha: 0, duration: 0.3, ease: 'power3.out' });
 
       gsap.utils.toArray('.srv-row').forEach((row, i) => {
         row.addEventListener('mouseenter', () => {
-          gsap.to(el, { scale: 1, autoAlpha: 1, duration: 0.6, ease: EASE });
-          gsap.to(imgs, { autoAlpha: 0, duration: 0.2 });
+          gsap.to(el, { scale: 1, autoAlpha: 1, duration: 0.5, ease: EASE });
+          gsap.to(imgs, { autoAlpha: 0, duration: 0.15 });
           gsap.fromTo(
             imgs[i],
-            { autoAlpha: 0, scale: 1.3, filter: 'blur(10px)' },
-            { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: EASE }
+            { autoAlpha: 0, scale: 1.2 },
+            { autoAlpha: 1, scale: 1, duration: 0.5, ease: EASE }
           );
         });
         row.addEventListener('mouseleave', hideFloat);
@@ -123,7 +126,14 @@ export default function Services() {
         onLeaveBack: hideFloat,
       });
 
-      return () => window.removeEventListener('mousemove', onMove);
+      window.addEventListener('blur', hideFloat);
+      document.addEventListener('mouseleave', hideFloat);
+
+      return () => {
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('blur', hideFloat);
+        document.removeEventListener('mouseleave', hideFloat);
+      };
     }, root);
 
     return () => ctx.revert();
@@ -144,9 +154,9 @@ export default function Services() {
       </p>
 
       <div className="srv-aside" aria-hidden="true">
-        <img className="srv-key" src='./key.png' alt="" data-speed="0.86" />
-        <img className="srv-pink-suit" src='./pink-suit.png' alt="" data-speed="1.1" />
-        <img className="srv-pepper" src='./pepper.png' alt="" data-speed="0.9" />
+        <div className="srv-key-holder">
+          <img className="srv-key" src='./key.png' alt="Ключ к идеальному событию" data-speed="0.86" />
+        </div>
         <p className="srv-laurel u-meta">Ежегодный победитель премии Wedding Awards</p>
       </div>
 

@@ -97,8 +97,8 @@ export default function Consultation() {
     <section className="consultation section" id="consultation" ref={root} data-theme="paper">
       <div className="sec-head">
         <h2 className="sec-title cns-kicker" style={{ display: 'flex', flexDirection: 'column' }}>
-          <div className="mask"><div className="cns-title-part cns-title-black">ИНДИВИД</div></div>
-          <div className="mask"><div className="cns-title-part cns-title-blue">КОНСУЛЬ</div></div>
+          <div className="mask"><div className="cns-title-part cns-title-black">ИНДИВИДУАЛЬНЫЕ</div></div>
+          <div className="mask"><div className="cns-title-part cns-title-blue">КОНСУЛЬТАЦИИ</div></div>
         </h2>
         <span className="idx">(05) / Личная работа</span>
       </div>

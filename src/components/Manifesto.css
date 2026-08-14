@@ -60,8 +60,11 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.045em;
-  line-height: 0.85;
-  font-size: clamp(3rem, 13.5vw, 13rem);
+  line-height: 0.88;
+  font-size: clamp(2.4rem, 10.5vw, 13rem);
+  white-space: nowrap;
+  word-break: keep-all;
+  hyphens: none;
   color: #fff;
   will-change: transform;
 }
@@ -125,7 +128,7 @@
 .mf-index {
   position: absolute;
   left: 50%;
-  bottom: clamp(1.2rem, 3.4vh, 2.6rem);
+  bottom: calc(clamp(1.2rem, 3.4vh, 2.6rem) + var(--sab));
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -148,13 +151,39 @@
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
-
 @media (max-width: 860px) {
   .mf-word-inner,
   .mf-ghost > div {
-    font-size: clamp(2.4rem, 15vw, 5rem);
+    font-size: clamp(2rem, 11vw, 4.5rem);
   }
-  .mf-cols { flex-direction: column; gap: 1.6rem; }
-  .mf-col-r { align-items: flex-start; text-align: left; }
+  .mf-cols {
+    padding: calc(clamp(4.2rem, 8vh, 6rem) + var(--sat)) var(--pad) calc(clamp(3.5rem, 7vh, 5rem) + var(--sab));
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .mf-col {
+    gap: 0.2rem;
+    font-size: 0.68rem;
+  }
+  .mf-col-label {
+    padding-bottom: 0.2rem;
+  }
+  .mf-col li:not(.is-on):not(.mf-col-label) {
+    display: none;
+  }
+  .mf-col li.is-on {
+    transform: none;
+    letter-spacing: 0.1em;
+  }
+  .mf-col-r li.is-on {
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .mf-word-inner,
+  .mf-ghost > div {
+    font-size: clamp(1.8rem, 10.5vw, 3rem);
+  }
 }

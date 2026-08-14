@@ -14,19 +14,27 @@
 
 .cns-title-part {
   display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  hyphens: none;
   font-family: var(--f-display);
   font-weight: 800;
-  font-size: clamp(4rem, 13vw, 12rem);
-  line-height: 0.82;
+  font-size: clamp(1.8rem, 5.8vw, 7.5rem);
+  line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
 @media (max-width: 860px) {
   .cns-title-part {
-    line-height: 1.05;
-    word-break: break-word;
-    font-size: clamp(3rem, 14vw, 11rem);
+    line-height: 1.02;
+    font-size: clamp(1.35rem, 6.2vw, 3.8rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .cns-title-part {
+    font-size: clamp(1.15rem, 5.8vw, 2rem);
   }
 }
 
@@ -37,7 +45,6 @@
 .cns-title-blue {
   color: var(--blue-bright);
 }
-
 
 .cns-left-inner {
   position: sticky;
@@ -53,7 +60,7 @@
   gap: 0.2em;
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: clamp(3.6rem, 10vw, 9rem);
+  font-size: clamp(3.2rem, 9vw, 9rem);
   line-height: 0.82;
   letter-spacing: -0.055em;
   color: var(--blue);
@@ -129,6 +136,16 @@
   will-change: transform;
 }
 
+.cns-figure::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 50%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .cns-figure img {
   width: 100%;
   height: 100%;
@@ -138,10 +155,20 @@
 
 .cns-figure-cap {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  color: var(--cream);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.85);
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 2;
+  color: #ffffff;
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(242, 223, 206, 0.3);
+  font-size: clamp(0.6rem, 0.72vw, 0.76rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
 /* ---- audience ---- */
@@ -177,11 +204,32 @@
 }
 
 @media (max-width: 1080px) {
-  .cns-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .cns-aud { grid-column: 1 / -1; }
+  .cns-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+  }
+  .cns-aud {
+    grid-column: 1 / -1;
+  }
+  .cns-aud ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 2rem;
+  }
 }
 
 @media (max-width: 700px) {
-  .cns-grid { grid-template-columns: 1fr; }
+  .cns-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
   .cns-left-inner { position: static; }
+  .cns-figure {
+    aspect-ratio: 16 / 10;
+    max-height: 340px;
+  }
+  .cns-aud ul {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }

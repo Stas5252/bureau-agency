@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { gsap, EASE, revealLines } from '../lib/anim';
+import { gsap, EASE } from '../lib/anim';
 import './Awards.css';
 
 const PRIVOLZHE = [
@@ -130,7 +130,8 @@ export default function Awards() {
       </div>
 
       <div className="awd-cols">
-        <div className="awd-group">
+        <div className="awd-group awd-group-card">
+          <img src='./tape-h.png' className="awd-tape-top" alt="" aria-hidden="true" />
           <h3 className="awd-group-title u-meta">
             Wedding Awards Приволжье<br />
             <span>Коллекция наград</span>
@@ -147,7 +148,7 @@ export default function Awards() {
         </div>
 
         <div className="awd-side">
-          <div className="awd-group">
+          <div className="awd-group awd-group-russia">
             <h3 className="awd-group-title u-meta">
               Wedding Awards Россия<br />
               <span>Коллекция наград</span>
@@ -164,6 +165,7 @@ export default function Awards() {
           </div>
 
           <div className="awd-group awd-jury">
+            <img src='./tape-v.png' className="awd-tape-jury" alt="" aria-hidden="true" />
             <h3 className="awd-group-title u-meta">
               Наши регалии<br />
               <span>Организаторы церемонии Wedding Awards Приволжье 2024</span>

@@ -67,6 +67,7 @@ export default function Benefits() {
 
   return (
     <section className="benefits section" ref={root} data-theme="paper">
+      <img src='./tape-h.png' className="bnf-tape-top" alt="" aria-hidden="true" />
       <h2 className="bnf-title">
         Что вы получите
         <br />

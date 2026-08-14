@@ -40,7 +40,7 @@
 .pl-inner {
   position: absolute;
   inset: 0;
-  padding: var(--pad);
+  padding: calc(var(--pad) + var(--sat)) calc(var(--pad) + var(--sar)) calc(var(--pad) + var(--sab)) calc(var(--pad) + var(--sal));
   display: grid;
   place-items: center;
   z-index: 1;
@@ -52,7 +52,7 @@
 
 .pl-mark {
   font-family: var(--f-black);
-  font-size: clamp(4rem, 17vw, 17rem);
+  font-size: clamp(3.2rem, 16vw, 17rem);
   line-height: 0.86;
   color: var(--blue);
   will-change: transform;
@@ -61,19 +61,19 @@
 .pl-sub {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(0.7rem, 1.4vw, 1.05rem);
-  letter-spacing: 0.32em;
+  font-size: clamp(0.6rem, 1.2vw, 1.05rem);
+  letter-spacing: clamp(0.15em, 0.28vw, 0.32em);
   text-transform: uppercase;
   padding-top: 0.9rem;
 }
 
 .pl-meta {
   position: absolute;
-  bottom: calc(var(--pad) + 1.6rem);
+  bottom: calc(var(--pad) + var(--sab) + 1.2rem);
 }
 
 .pl-meta-l {
-  left: var(--pad);
+  left: calc(var(--pad) + var(--sal));
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -85,13 +85,13 @@
 }
 
 .pl-meta-r {
-  right: var(--pad);
+  right: calc(var(--pad) + var(--sar));
 }
 
 .pl-count {
   font-family: var(--f-display);
   font-weight: 800;
-  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-size: clamp(1.8rem, 4.5vw, 4.4rem);
   letter-spacing: -0.05em;
   line-height: 0.8;
   color: var(--blue);
@@ -100,9 +100,9 @@
 
 .pl-line {
   position: absolute;
-  left: var(--pad);
-  right: var(--pad);
-  bottom: var(--pad);
+  left: calc(var(--pad) + var(--sal));
+  right: calc(var(--pad) + var(--sar));
+  bottom: calc(var(--pad) + var(--sab));
   height: 1px;
   background: rgba(10, 10, 10, 0.18);
 }

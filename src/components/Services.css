@@ -29,17 +29,36 @@
   pointer-events: none;
 }
 
+.srv-key-holder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .srv-key {
   width: 100%;
   pointer-events: none;
-  /* the PNG sits on a tan backdrop: lift it toward white, multiply it into the
-     cream and feather the edges so no rectangle survives */
   filter: grayscale(1) brightness(1.3) contrast(1.3);
   mix-blend-mode: multiply;
   opacity: 0.92;
   z-index: 0;
   -webkit-mask-image: radial-gradient(58% 58% at 50% 50%, #000 45%, transparent 92%);
   mask-image: radial-gradient(58% 58% at 50% 50%, #000 45%, transparent 92%);
+}
+
+.srv-key-label {
+  display: inline-block;
+  font-size: clamp(0.6rem, 0.75vw, 0.75rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  opacity: 0.85;
+  text-align: center;
+  max-width: 22ch;
+  line-height: 1.25;
+  margin-top: -1.5rem;
+  z-index: 2;
 }
 
 .srv-pink-suit {
@@ -199,24 +218,15 @@
 }
 
 @media (max-width: 980px) {
-  /* the aside stops floating and becomes a small banner above the list */
   .srv-aside {
-    position: static;
-    width: auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    margin: -1.5rem 0 2.5rem;
+    display: none;
   }
-  .srv-key { width: clamp(90px, 26vw, 160px); }
-  .srv-laurel { text-align: left; max-width: 20ch; }
 }
 
 /* touch never fires hover: keep the descriptions and numbers legible */
 @media (hover: none) {
-  .srv-desc { opacity: 0.72; transform: none; }
-  .srv-num { opacity: 0.7; }
+  .srv-desc { opacity: 0.75; transform: none; }
+  .srv-num { opacity: 0.75; }
   .srv-title-ghost { display: none; }
 }
 
@@ -226,10 +236,25 @@
     grid-template-areas:
       'num title'
       '. desc';
-    row-gap: 0.5rem;
+    row-gap: 0.6rem;
+    column-gap: 0.8rem;
+    padding: 1.2rem 0;
   }
-  .srv-num { grid-area: num; }
-  .srv-title { grid-area: title; }
-  .srv-desc { grid-area: desc; opacity: 0.7; transform: none; }
+  .srv-num {
+    grid-area: num;
+    align-self: start;
+    padding-top: 0.15em;
+  }
+  .srv-title {
+    grid-area: title;
+    font-size: clamp(1.15rem, 4.8vw, 2.2rem);
+  }
+  .srv-desc {
+    grid-area: desc;
+    opacity: 0.75;
+    transform: none;
+    font-size: clamp(0.82rem, 3.4vw, 0.95rem);
+    line-height: 1.42;
+  }
   .srv-arrow { display: none; }
 }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { gsap, ScrollTrigger, ScrollSmoother, reduced, isTouch } from './lib/anim';
+import { gsap, ScrollTrigger, ScrollSmoother, reduced } from './lib/anim';
 
 import Preloader from './components/Preloader';
 import Cursor from './components/Cursor';
@@ -46,9 +46,9 @@ export default function App() {
         : ScrollSmoother.create({
             wrapper: '#smooth-wrapper',
             content: '#smooth-content',
-            smooth: 1.35,
+            smooth: 0.65,
             effects: true,
-            smoothTouch: 0.1,
+            smoothTouch: false,
             ignoreMobileResize: true,
           });
     smootherRef.current = smoother;
@@ -60,15 +60,11 @@ export default function App() {
       gsap.utils.toArray('[data-theme]').forEach((section) => {
         const theme = THEMES[section.dataset.theme];
         if (!theme) return;
-        const apply = (t) =>
-          gsap.to(root, {
-            '--bg': t.bg,
-            '--fg': t.fg,
-            '--accent': t.accent,
-            duration: 0.65,
-            ease: 'power2.out',
-            overwrite: 'auto',
-          });
+        const apply = (t) => {
+          root.style.setProperty('--bg', t.bg);
+          root.style.setProperty('--fg', t.fg);
+          root.style.setProperty('--accent', t.accent);
+        };
 
         ScrollTrigger.create({
           trigger: section,
@@ -83,7 +79,7 @@ export default function App() {
       gsap.to('.progress-bar', {
         scaleX: 1,
         ease: 'none',
-        scrollTrigger: { start: 0, end: 'max', scrub: 0.3 },
+        scrollTrigger: { start: 0, end: 'max', scrub: 0.2 },
       });
     }, rootRef);
 
