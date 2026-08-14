@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { gsap, ScrollTrigger, reduced, isTouch } from '../lib/anim';
+import { gsap, reduced, isTouch } from '../lib/anim';
 import './Manifesto.css';
 
 const SLIDES = [
@@ -20,9 +20,12 @@ export default function Manifesto() {
       const words = gsap.utils.toArray('.mf-words');
       const n = SLIDES.length;
 
-      gsap.set(media.slice(1), { autoAlpha: 0, scale: 1.2 });
+      gsap.set(media.slice(1), { autoAlpha: 0, scale: 1.15 });
       gsap.set(words.slice(1), { autoAlpha: 0 });
-      gsap.set(words.slice(1).map((w) => w.querySelectorAll('.mf-word-inner')), { yPercent: 140 });
+      gsap.set(
+        words.slice(1).map((w) => w.querySelectorAll('.mf-word-inner')),
+        { yPercent: 130, autoAlpha: 0 }
+      );
 
       if (reduced()) return;
 
@@ -30,57 +33,46 @@ export default function Manifesto() {
         scrollTrigger: {
           trigger: root.current,
           start: 'top top',
-          /* a phone needs far less travel per slide than a desktop wheel */
-          end: `+=${n * (isTouch() ? 62 : 110)}%`,
+          end: `+=${n * (isTouch() ? 80 : 100)}%`,
           pin: true,
-          scrub: 0.9,
-          onUpdate: (self) => setActive(Math.round(self.progress * (n - 1))),
+          scrub: 0.4,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const idx = Math.min(n - 1, Math.floor(self.progress * n));
+            setActive(idx);
+          },
         },
       });
 
       for (let i = 1; i < n; i++) {
         const at = i - 1;
-        tl.to(media[i - 1], { autoAlpha: 0, scale: 0.94, ease: 'power2.inOut' }, at)
-          .to(media[i], { autoAlpha: 1, scale: 1, ease: 'power2.inOut' }, at)
+        tl.to(media[i - 1], { autoAlpha: 0, scale: 0.94, duration: 0.75, ease: 'power2.inOut' }, at)
           .to(
             words[i - 1].querySelectorAll('.mf-word-inner'),
-            { yPercent: -140, stagger: 0.05, ease: 'power3.inOut' },
+            { yPercent: -130, autoAlpha: 0, duration: 0.4, stagger: 0.04, ease: 'power3.in' },
             at
           )
-          .to(words[i - 1], { autoAlpha: 0, duration: 0.4 }, at + 0.5)
-          .to(words[i], { autoAlpha: 1, duration: 0.1 }, at + 0.15)
-          .to(
+          .to(media[i], { autoAlpha: 1, scale: 1, duration: 0.75, ease: 'power2.inOut' }, at + 0.2)
+          .to(words[i], { autoAlpha: 1, duration: 0.1 }, at + 0.2)
+          .fromTo(
             words[i].querySelectorAll('.mf-word-inner'),
-            { yPercent: 0, stagger: 0.05, ease: 'power3.inOut' },
-            at + 0.15
+            { yPercent: 130, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.55, stagger: 0.04, ease: 'power3.out' },
+            at + 0.25
           );
       }
 
       /* the stage drifts under the pointer for depth */
       if (!isTouch()) {
-        const px = gsap.quickTo('.mf-stage', 'x', { duration: 1.3, ease: 'power3' });
-        const py = gsap.quickTo('.mf-stage', 'y', { duration: 1.3, ease: 'power3' });
+        const px = gsap.quickTo('.mf-stage', 'x', { duration: 1.2, ease: 'power3' });
+        const py = gsap.quickTo('.mf-stage', 'y', { duration: 1.2, ease: 'power3' });
         const onMove = (e) => {
-          px((e.clientX / window.innerWidth - 0.5) * -36);
-          py((e.clientY / window.innerHeight - 0.5) * -24);
+          px((e.clientX / window.innerWidth - 0.5) * -28);
+          py((e.clientY / window.innerHeight - 0.5) * -18);
         };
         window.addEventListener('mousemove', onMove, { passive: true });
         cleanups.push(() => window.removeEventListener('mousemove', onMove));
       }
-
-      /* smear: a blurred ghost of the type lags on fast scroll */
-      const ghost = gsap.quickTo('.mf-type', 'skewY', { duration: 0.6, ease: 'power3' });
-      const blurSet = gsap.quickSetter('.mf-ghost', 'opacity');
-      ScrollTrigger.create({
-        trigger: root.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        onUpdate: (self) => {
-          const v = Math.abs(self.getVelocity());
-          ghost(gsap.utils.clamp(-4, 4, self.getVelocity() / -520));
-          blurSet(gsap.utils.clamp(0, 0.38, v / 4200));
-        },
-      });
     }, root);
 
     return () => {
@@ -111,10 +103,6 @@ export default function Manifesto() {
             </div>
           </div>
         ))}
-        <div className="mf-ghost" aria-hidden="true">
-          <div>{SLIDES[active].a}</div>
-          <div className="mf-word-b">{SLIDES[active].b}</div>
-        </div>
       </div>
 
       <div className="mf-cols">

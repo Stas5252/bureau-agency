@@ -45,8 +45,7 @@
   will-change: transform;
 }
 
-.mf-words,
-.mf-ghost {
+.mf-words {
   position: absolute;
   left: var(--pad);
   right: var(--pad);
@@ -54,8 +53,7 @@
   transform: translateY(-50%);
 }
 
-.mf-word-inner,
-.mf-ghost > div {
+.mf-word-inner {
   font-family: var(--f-display);
   font-weight: 900;
   text-transform: uppercase;
@@ -73,13 +71,6 @@
   text-align: right;
   -webkit-text-stroke: 1.5px #fff;
   color: transparent;
-}
-
-.mf-ghost {
-  opacity: 0;
-  z-index: 0;
-  /* filter: blur(16px); убрано из-за лагов при скролле */
-  pointer-events: none;
 }
 
 /* ---- side columns ---- */
