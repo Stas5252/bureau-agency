@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { gsap, ScrollTrigger, ScrollSmoother, reduced } from './lib/anim';
+import { gsap, ScrollTrigger, ScrollSmoother, reduced, isTouch } from './lib/anim';
 
 import Preloader from './components/Preloader';
 import Cursor from './components/Cursor';
