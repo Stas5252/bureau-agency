@@ -38,15 +38,14 @@ export default function App() {
   useEffect(() => {
     /* Touch devices get plain native scrolling. A smoother there means a fixed
        wrapper whose transform is driven from JS, which always trails the
-       compositor during momentum scrolling — that reads as stutter on a phone.
-       The cost is losing data-speed parallax on mobile, which is the right trade. */
+       compositor during momentum scrolling — that reads as stutter on a phone. */
     const smoother =
-      reduced()
+      isTouch() || reduced()
         ? null
         : ScrollSmoother.create({
             wrapper: '#smooth-wrapper',
             content: '#smooth-content',
-            smooth: 0.65,
+            smooth: 0.6,
             effects: true,
             smoothTouch: false,
             ignoreMobileResize: true,

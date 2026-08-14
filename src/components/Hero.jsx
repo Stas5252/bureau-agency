@@ -30,22 +30,19 @@ export default function Hero({ started }) {
 
       if (reduced()) return;
 
-      /* exit: the whole hero is pulled into the fold.
-         No pin on touch — a pinned first screen fights the native scroll. */
+      /* exit: natural parallax scroll into next section */
       gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.8,
-          pin: true,
-          pinSpacing: false,
+          scrub: 0.3,
         },
       })
-        .to('.hero-mark', { scale: 1.22, yPercent: -6, autoAlpha: 0.15, ease: 'power2.in' }, 0)
-        .to('.hero-tag', { yPercent: 140, autoAlpha: 0, ease: 'power2.in' }, 0)
-        .to('.hero-meta', { yPercent: (i) => (i % 2 ? 90 : -90), autoAlpha: 0, ease: 'power1.in' }, 0)
-        .to('.hero-strip', { yPercent: 22, scale: 1.15, autoAlpha: 0.15, ease: 'none' }, 0)
+        .to('.hero-mark', { scale: 1.15, yPercent: -8, autoAlpha: 0.2, ease: 'none' }, 0)
+        .to('.hero-tag', { yPercent: 120, autoAlpha: 0, ease: 'none' }, 0)
+        .to('.hero-meta', { yPercent: (i) => (i % 2 ? 60 : -60), autoAlpha: 0, ease: 'none' }, 0)
+        .to('.hero-strip', { yPercent: 18, scale: 1.1, autoAlpha: 0.2, ease: 'none' }, 0)
         .to('.hero-cue', { autoAlpha: 0, duration: 0.15 }, 0);
 
       /* pointer parallax */
