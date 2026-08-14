@@ -3,12 +3,13 @@
   background: var(--paper);
   color: var(--ink);
   overflow: hidden;
-  padding-top: clamp(2.5rem, 6vh, 4.5rem);
+  padding-top: clamp(3.5rem, 8vh, 6rem);
+  padding-bottom: clamp(4rem, 9vh, 7rem);
 }
 
 .bnf-tape-top {
   position: absolute;
-  top: 10px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%) rotate(-1.5deg);
   width: clamp(90px, 12vw, 140px);
@@ -23,10 +24,10 @@
   text-transform: uppercase;
   letter-spacing: -0.04em;
   line-height: 0.9;
-  font-size: clamp(1.7rem, 5.8vw, 6rem);
+  font-size: clamp(1.8rem, 5.8vw, 6rem);
   text-align: center;
   max-width: 22ch;
-  margin: 0 auto;
+  margin: 0 auto clamp(2.2rem, 5vw, 4rem);
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -40,7 +41,7 @@
   justify-content: center;
   gap: clamp(2rem, 16vw, 18rem);
   color: var(--blue);
-  margin: clamp(0.6rem, 2vw, 1.6rem) 0 clamp(1.6rem, 4vw, 3rem);
+  margin: -1rem 0 clamp(1.6rem, 3.5vw, 2.8rem);
 }
 
 .bnf-arrow {
